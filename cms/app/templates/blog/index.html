@@ -1,0 +1,81 @@
+{% extends "_base.html" %}
+{% block head %}
+	{{ super() }}
+	<script type="text/javascript" src="{{ url_for('static', filename='js/global.js') }}"></script>
+{% endblock %}
+{% block content %}
+<div class="row page-content">
+	<div class="col-lg-9">
+		{% if posts %}
+			{% for post in posts.items %}
+		<div class="post-block">
+			<article class="post substrate">
+				<h3><a target="_blank" href="/blog/{{ post.perma_link }}/">{{ post.title }}</a></h3>
+				<div class="post-meta last-meta">
+					发表于 ：{{ post.created_at }}
+				</div>
+				<div class="post-desc-wrap clearfix">
+					{% if post.post_image %}
+					<div class="post-desc-left">
+	            		<img class="blog-image" alt="{{ post.title }}" title ="{{ post.title }}" src="{{ post.renderImage() }}" />
+					</div>
+					<div class="post-desc-right">{{ post.summary|safe }}</div>
+					{% else %}
+					{{ post.summary|safe }}
+					{% endif %}
+					<br />
+					<div class="clearfix">
+						<span class="pull-left">阅读数 ：{{ post.view_count }}</span>
+						<a target="_blank" href="/blog/{{ post.id }}/" class="pull-right">阅读更多...</a>
+					</div>
+				</div>
+			</article>
+		</div>
+			{% endfor %}
+		{% endif %}
+		<div class="post-block">
+			<ul class="pagination">
+				{% for page in posts.iter_pages() %}
+				{% if page %}
+				{% if page != posts.page %}
+				<li class="active">
+				<a href="{{ url_for('main.index', page=page) }}">{{ page }}</a>
+				</li>
+				{% else %}
+				<li class="disabled"><a href="#">{{ page }}</a></li>
+				{% endif %}
+				{% else %}
+				<span class=ellipsis>…</span>
+				{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<div class="col-lg-3">
+		<div class="post-block">
+			<div class="substrate widget">
+				<h3>分类</h3>
+				<ul>
+					{% if categories %}
+						{% for category in categories%}
+					<li><a title="{{ category.title }}" href="/blog/category/{{ category.id }}">{{ category.title }} ({{ category.renderCount() }})</a></li>
+						{% endfor %}
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+		<div class="post-block">
+			<div class="substrate widget">
+				<h3>归档</h3>
+				<ul>
+					{% if dates %}
+						{% for date in dates%}
+					<li><a title="{{ date.created_month }}" href="/blog/archive/{{ date.created_month }}">{{ date.created_month }}</a></li>
+						{% endfor %}
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

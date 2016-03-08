@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Flask CMS -- 后台管理</title>
+	<link href="/static/favicon.ico" rel="bookmark" type="image/x-icon" />
+	<link href="/static/favicon.ico" rel="icon" type="image/x-icon" />
+	<link href="/static/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+	{% block head %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='admin/css/style.css') }}">
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='admin/js/global.js') }}"></script>
+	{% endblock %}
+</head>
+<body>
+<div id="wrapper">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="{{ url_for('admin_user.list') }}">Flask CMS -- 后台管理</a>
+		</div>
+		<a class="navbar-brand navbar-link pull-right" href="{{ url_for('admin_user.list') }}">登出</a>
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<ul class="nav navbar-nav side-nav">
+				<li>&nbsp;</li>
+				<li {% if '/dasboard' in request.url_rule.rule %} class="active" {% endif %}>
+					<a href="{{ url_for('dashboard.index') }}">Dashboard</a>
+				</li>
+				<li {% if '/category' in request.url_rule.rule %} class="active" {% endif %}>
+					<a href="{{ url_for('admin_category.list') }}">Category</a>
+				</li>
+				<li>&nbsp;</li>
+				<li {% if '/adminuser' in request.url_rule.rule %} class="active" {% endif %}>
+					<a href="{{ url_for('admin_user.list') }}">Admin Users</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<div id="page-wrapper">
+		 <div class="row content-body">
+			<div class="col-lg-12">
+				{% block content %}{% endblock %}
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

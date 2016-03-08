@@ -1,0 +1,23 @@
+{% extends "_base.html" %}
+{% block head %}
+	{{ super() }}
+	<link rel="stylesheet" href="{{ url_for('static', filename='js/fancybox/jquery.fancybox.css') }}">
+	<script type="text/javascript" src="{{ url_for('static', filename='js/fancybox/jquery.fancybox.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/comment.js') }}"></script>
+{% endblock %}
+{% block content %}
+<div class="row page-content">
+	<div class="col-md-12">
+		<div class="post-block">
+			<div class="substrate widget">
+				<h2><a href="/blog/{{ post.id }}/">{{ post.title }}</a></h2>
+				<div class="post-meta last-meta">
+					<span class="hrefspace">发表于 ：{{ post.created_at }}</span>
+					<span>阅读数 ：{{ post.view_count }}</span>
+				</div>
+				<article class="post-content">{{ post.content|safe }}</article>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% block head %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='admin/css/login.css') }}">
+	<title>Jacky's Blog Backend Management</title>
+	{% endblock %}
+</head>
+<body>
+	<div id="content">{% block content %}{% endblock %}</div>
+</body>
+</html>

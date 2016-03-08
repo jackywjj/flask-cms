@@ -1,0 +1,44 @@
+* {
+  font-family:Verdana, Arial,'Liberation Sans','FreeSans','Hiragino Sans GB',sans-serif,'Helvetica Neue';
+}
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+  background: url("/static/imgs/background.jpg") repeat scroll 0 0 #DCDFE2;
+}
+.login-wrap {
+	border: 1px solid #dedede;
+	background-color: #dedede;
+	width: 500px;
+	margin: auto;
+	margin-top: 100px;
+	padding-bottom: 50px;
+}
+.login-wrap h2 {
+	padding-bottom: 20px;
+}
+.form-signin {
+  max-width: 380px;
+  padding: 30px;
+  margin: 0 auto;
+}
+.form-signin .form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="text"] {
+  margin-bottom: 15px;
+
+}
+.form-signin input[type="password"] {
+  margin-bottom: 15px;
+}

@@ -1,0 +1,19 @@
+{% extends "admin/_base.html" %}
+{% block head %}
+	{{ super() }}
+{% endblock %}
+{% block content %}
+<h2>分类 <small>编辑</small></h2>
+<div class="clearfix">
+	<a href="{{ url_for('admin.categoryIndex') }}" class="btn btn-primary pull-right">返回</a>
+</div>
+<div class="table-responsive">
+	<div class="row">
+		<div class="col-lg-6">
+			<form method="POST" action="{{ url_for('admin.categoryUpdate', id=category.id) }}" class="form-horizontal">
+			{% include 'admin/category/_form.html' %}
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

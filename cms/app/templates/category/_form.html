@@ -1,0 +1,20 @@
+{% if form.errors %}
+<div class="error-div col-lg-offset-3">
+	{% for key in form.errors %}
+		{%for error in form.errors[key] %}
+	<div class="alert alert-danger">{{ error }}</div>
+		{% endfor %}
+	{% endfor %}
+</div>
+{% endif %}
+<div class="form-group">
+	{{ form.title.label(class='col-lg-3 control-label') }}
+	<div class="col-lg-5">
+		{{ form.title(class='form-control') }}
+	</div>
+</div>
+<div class="form-group">
+	<div class="col-lg-offset-3 col-lg-10">
+		<button name="" type="submit" class="btn btn-primary">提交</button>
+	</div>
+</div>

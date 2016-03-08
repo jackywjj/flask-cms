@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>树妖攻城狮的IT实验室</title>
+	<link href="/static/favicon.ico" rel="bookmark" type="image/x-icon" />
+	<link href="/static/favicon.ico" rel="icon" type="image/x-icon" />
+	<link href="/static/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+	{% block head %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	{% endblock %}
+	<link href="{{ url_for('main.rssIndex') }}" rel="alternate" title="Recent Changes" type="application/atom+xml">
+</head>
+<body>
+<div id="content-wrap" class="container">
+	<div class="row">
+		{% include '_page_top.html' %}
+		<div class="col-md-5">
+			<div id="page-nav" class="pull-right">
+				<ul>
+					<li class="red">
+						<a href="/" {% if '/' in request.url_rule.rule and '/album' not in request.url_rule.rule and '/aboutme' not in request.url_rule.rule %} class="active" {% endif %}>
+							<div class="page-nav-icon"><img src="/static/imgs/icon-home.png" alt="博客" title="博客" /></div>
+							<div class="page-nav-menutext">博客</div>
+						</a>
+					</li>
+					<li class="blue">
+						<a href="/album/" {% if '/album' in request.url_rule.rule %} class="active" {% endif %}>
+							<div class="page-nav-icon"><img src="/static/imgs/icon-album.png" alt="相册" title="相册" /></div>
+							<div class="page-nav-menutext">相册</div>
+						</a>
+					</li>
+					<li class="green">
+						<a href="/aboutme/" {% if '/aboutme' in request.url_rule.rule %} class="active" {% endif %}>
+							<div class="page-nav-icon"><img src="/static/imgs/icon-gear.png" alt="关于我" title="关于我" /></div>
+							<div class="page-nav-menutext">关于我</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		{% if '/album' in request.url_rule.rule %}
+		<div class="col-md-12 page-nav-menu-blue">
+			<div class="page-crumbmenu">相册</div>
+		</div>
+		{% elif '/aboutme' in request.url_rule.rule %}
+		<div class="col-md-12 page-nav-menu-green">
+			<div class="page-crumbmenu">关于我</div>
+		</div>
+		{% else %}
+		<div class="col-md-12 page-nav-menu-red">
+			<div class="page-crumbmenu">博客</div>
+		</div>
+		{% endif %}
+	</div>
+	{% block content %}{% endblock %}
+	{% include '_footer.html' %}
+</div>
+</body>
+</html>

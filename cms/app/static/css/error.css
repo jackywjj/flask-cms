@@ -1,0 +1,19 @@
+html,body {
+	background : #2D2C2C;
+}
+.container {
+	font-size:300px;
+	color: #fff;
+	width: 500px;
+	margin: auto;
+	padding-top:100px;
+}
+.link {
+	width: 500px;
+	margin: auto;
+	padding-top:100px;
+	text-align: right;
+}
+.link a {
+	color: #fff;
+}
