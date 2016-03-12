@@ -39,6 +39,15 @@
 	<div id="page-wrapper">
 		 <div class="row content-body">
 			<div class="col-lg-12">
+				{% with msgs = get_flashed_messages() %}
+        {% if msgs %}
+          {%- for msg in msgs %}
+            <div class="alert alert-info">
+              {{ msg }}
+            </div>
+          {% endfor -%}
+        {% endif %}
+      {% endwith %}
 				{% block content %}{% endblock %}
 			</div>
 		</div>

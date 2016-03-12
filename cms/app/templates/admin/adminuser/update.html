@@ -10,7 +10,7 @@
 <div class="table-responsive">
 	<div class="row">
 		<div class="col-lg-6">
-			<form method="POST" action="{{ url_for('admin_user.create', id=adminUser.id) }}" class="form-horizontal">
+			<form method="POST" action="{{ url_for('admin_user.update', id=adminUser.id) }}" class="form-horizontal">
 				{% include 'admin/adminuser/_form.html' %}
 			</form>
 		</div>

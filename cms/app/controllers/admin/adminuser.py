@@ -7,6 +7,7 @@ from config import BACKEND_URI
 from app import db
 from app.models import *
 from app.forms.admin import *
+import hashlib
 
 admin_user = Blueprint('admin_user', __name__, url_prefix=BACKEND_URI + '/adminuser')
 
@@ -19,21 +20,33 @@ def list():
 @admin_user.route('/create', methods=['GET', 'POST'])
 def create():
     form = AdminUserForm(request.form)
+    if request.method == "POST" and form.validate():
+        user_pass = hashlib.md5(form.user_pass.data.encode('utf-8')).hexdigest()
+        adminUser = AdminUser(form.user_name.data, user_pass)
+        db.session.add(adminUser)
+        db.session.commit()
+        return redirect(url_for('admin_user.list'))
     return render_template("admin/adminuser/create.html", form=form)
 
 @admin_user.route('/<id>/update', methods=['GET', 'POST'])
 def update(id):
     adminUser = AdminUser.query.get(id)
     form = AdminUserForm(request.form, adminUser)
+    if request.method == "POST" and form.validate():
+        user_pass = hashlib.md5(form.user_pass.data.encode('utf-8')).hexdigest()
+        adminUser.user_name = form.user_name.data
+        adminUser.user_pass = user_pass
+        db.session.commit()
+        return redirect(url_for('admin_user.list'))
     return render_template("admin/adminuser/update.html", form=form, adminUser=adminUser)
 
 @admin_user.route('/<id>/delete', methods=['GET'])
 def delete(id):
-    user = AdminUser.query.get(id)
-    if user.id == 1:
+    adminUser = AdminUser.query.get(id)
+    if adminUser.id == 1:
         flash(u'无法删除系统用户.')
     else:
-        db.session.delete(user)
+        db.session.delete(adminUser)
         db.session.commit()
     return redirect(url_for('admin_user.list'))
 
