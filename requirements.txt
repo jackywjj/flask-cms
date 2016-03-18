@@ -5,7 +5,6 @@ MySQL-python
 flask-paginate
 flask-login
 flask-admin
-flask-babel
 flask-script
 flask-wtf
 flask-mongoengine

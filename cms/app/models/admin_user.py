@@ -1,5 +1,6 @@
 import time
 import re
+import hashlib
 
 from app import db
 from sqlalchemy.orm import relationship
@@ -20,7 +21,7 @@ class AdminUser(Base):
 		return '<User %r>' % (self.name)
 
 	def check_password(self, user_pass):
-		if self.user_pass == user_pass:
+		if self.user_pass == hashlib.md5(user_pass).hexdigest():
 			return True
 		else:
 			return False
